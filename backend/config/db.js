@@ -8,24 +8,26 @@ const dataBase = new Sequelize(
   `${process.env.DB_NAME}`,
   `${process.env.DB_USER}`,
   `${process.env.DB_PASSWORD}`,
+
   {
     host: `${process.env.DB_HOST}`,
     port:3306,          //`${process.env.PORT}`,
     dialect: "mysql",
     dialectOptions: {
-      //timezone: "local",
-      socketPath: "C:\\MAMP\bin\mysql\bin"
+      timezone: "local",
+      //socketPath: "C:\\MAMP\bin\mysql\bin"
     },
     login: false,
   }
+  
 );
 
-dataBase
-  .authenticate()
-  .then(() => console.log("Connexion à la base de données réussie"))
-  .catch((error) =>
-    console.log("FLOP Impossible de se connecter à la base de données FLOP")
-  );
+try {
+  dataBase.authenticate();
+  console.log('Connection établie, ISS enterprise prêt au combat');
+} catch (error) {
+  console.error('Les klingons sa piques:', error);
+}
 
 const post = postModel(dataBase, DataTypes);
 const user = userModel(dataBase, DataTypes);
@@ -37,7 +39,7 @@ const initDb = () => {
       user.create({
         email: "admin@gmail.com",
         pseudo: "admin",
-        password: hash,
+        password: openclassroom,
         isAdmin: true,
       }).then((user) => console.log(user.toJSON()));
     ;
@@ -45,4 +47,4 @@ const initDb = () => {
   });
 };
 
-module.exports = { initDb, user, post, comment };
+module.exports = { initDb, user, post, comment, dataBase };
