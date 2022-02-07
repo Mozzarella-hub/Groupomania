@@ -35,9 +35,9 @@ const SignUpForm = () => {
         method: "post",
         url: `${process.env.REACT_APP_API_URL}api/user/register`,
         data: {
-          pseudo,
-          email,
-          password,
+          pseudo: this.pseudo,
+          email: this.email,
+          password: this.password,
         },
       })
         .then((res) => {
