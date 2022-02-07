@@ -164,7 +164,7 @@ module.exports.deleteUser = (req, res) => {
   const { User } = require("../config/db");
   const { ValidationError } = require("sequelize");
   const jwt = require("jsonwebtoken");
-  //const privateKey = require("../auth/private_keys");
+
 
   // inscription
   exports.signup = (req, res, next) => {
@@ -284,4 +284,3 @@ module.exports.deleteUser = (req, res) => {
       });
     });
   };
-//privateKey, A TOKEN

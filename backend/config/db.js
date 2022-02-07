@@ -3,7 +3,7 @@ const userModel = require("../models/user");
 const postModel = require("../models/post");
 const commentModel = require("../models/comment");
 const config=require('../config/config.json');
-//require("dotenv").config();
+require("dotenv").config();
 
 const dataBase = new Sequelize(
   `${config.development.database}`,
