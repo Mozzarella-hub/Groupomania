@@ -4,7 +4,7 @@
   "description": "Api du p7",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",

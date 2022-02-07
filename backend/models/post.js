@@ -1,33 +1,3 @@
-/*'use strict';
-const { Model } = require('sequelize');
-//const { FOREIGNKEYS } = require('sequelize/dist/lib/query-types');
-module.exports = (sequelize, DataTypes) => {
-  class post extends Model {
-   
-    static associate(models) {
-      
-      // define association here
-        models.post.belongTo(models.user), {
-          foreignKey: {
-            allowNull: false
-          }
-        }
-
-    }
-  }
-  post.init({
-    id_user: DataTypes.INTEGER,
-    isAdmin: DataTypes.BOOLEAN,
-    like: DataTypes.INTEGER,
-    picture: DataTypes.STRING,
-    video: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'post',
-  });
-  return post;
-};
-*/
 
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define("Post", {
@@ -42,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     picture: {
       type: DataTypes.STRING,
-      allowNull: false,
+    
     },
     video: {
       type: DataTypes.STRING,
-      allowNull: false,
+      
     },
 
     posterId: {
@@ -55,3 +25,36 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 };
+
+
+/*
+"use strict";
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class Post extends Model {
+    
+    static associate(models) {
+      models.Post.hasMany(models.Comment, { onDelete: "CASCADE", hooks: true });
+
+      models.Post.belongsTo(models.User, {
+        foreignKey: {
+          allowNull: false,
+        },
+      });
+    }
+  }
+  Post.init(
+    {
+      userId: DataTypes.INTEGER,
+      imageUrl: DataTypes.STRING,
+      title: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "Post",
+    }
+  );
+  return Post;
+};
+
+*/

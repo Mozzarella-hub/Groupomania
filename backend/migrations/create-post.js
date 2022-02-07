@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up  (queryInterface, Sequelize) {
     await queryInterface.createTable('posts', {
       id: {
         allowNull: false,
@@ -11,10 +11,11 @@ module.exports = {
       id_user: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        /*references: {
+        references: {
           model:'user',
           key:'id'
-        }*/
+        },
+        onDelete: "CASCADE",
       },
       isAdmin: {
         allowNull: false,
@@ -29,7 +30,7 @@ module.exports = {
         allowNull: false
       },
       pictureUrl: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING
       },
       videoUrl: {
@@ -46,7 +47,4 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('posts');
-  }
 };
