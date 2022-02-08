@@ -33,11 +33,14 @@ const SignUpForm = () => {
     } else {
       await axios({
         method: "post",
-        url: `${process.env.REACT_APP_API_URL}api/user/register`,
+        url: "http://localhost:3000/api/user/register",   // `${process.env.REACT_APP_API_URL}api/user/register`
         data: {
           pseudo: pseudo,    
           email: email,  
           password: password, 
+        },
+        headers: {
+          "Access-Control-Allow-Origin": "*",
         },
       })
         .then((res) => {
