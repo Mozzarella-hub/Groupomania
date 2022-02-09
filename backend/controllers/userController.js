@@ -161,7 +161,7 @@ module.exports.deleteUser = (req, res) => {
 */
 
   const bcrypt = require("bcrypt");
-  const { User } = require("../config/db");
+  const { user } = require("../config/db");
   const { ValidationError } = require("sequelize");
   const jwt = require("jsonwebtoken");
 
@@ -170,7 +170,7 @@ module.exports.deleteUser = (req, res) => {
   exports.signup = (req, res, next) => {
     console.log(req.body);
     bcrypt.hash(req.body.password, 10).then((hash) => {
-      User.create({
+      user.create({
         email: req.body.email,
         pseudo: req.body.pseudo,
         password: hash,
@@ -194,7 +194,7 @@ module.exports.deleteUser = (req, res) => {
 
   // connexion
   exports.login = (req, res, next) => {
-    User.findOne({
+    user.findOne({
       where: {
         email: req.body.email,
       },
@@ -224,14 +224,14 @@ module.exports.deleteUser = (req, res) => {
   // CRUD USER
   //Récupérer tous les users
   exports.getAllUsers = (req, res, next) => {
-    User.findAll({ attributes: { exclude: ["password"] } }).then((users) => {
+    user.findAll({ attributes: { exclude: ["password"] } }).then((users) => {
       res.status(200).json(users);
     });
   };
 
   //Récupérer un seul utilisateur
   exports.getOneUser = (req, res, next) => {
-    User.findOne({
+    user.findOne({
       where: {
         id: req.params.id,
       },
@@ -246,7 +246,7 @@ module.exports.deleteUser = (req, res) => {
 
   // update user
   exports.updateUser = (req, res, next) => {
-    User.findOne({
+    user.findOne({
       where: {
         id: req.params.id,
       },
@@ -270,7 +270,7 @@ module.exports.deleteUser = (req, res) => {
 
   //Delete user
   exports.deleteUser = (req, res, next) => {
-    User.findOne({
+    user.findOne({
       where: {
         id: req.params.id,
       },

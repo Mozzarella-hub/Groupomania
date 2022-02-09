@@ -35,7 +35,7 @@ const userCtrl = require("../controllers/userController");
 // auth
 
 //inscription
-router.post("/signup", userCtrl.signup);
+router.post("/register", userCtrl.signup);
 router.post("/login", userCtrl.login);
 
 //user db

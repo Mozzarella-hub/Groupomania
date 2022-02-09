@@ -1,6 +1,15 @@
+
+
 import React, { useState } from "react";
 import axios from "axios";
 import SignInForm from "./SignInForm";
+
+/*
+import express from "express";
+var app = express();
+var cors = require('cors');
+app.use(cors());
+*/
 
 const SignUpForm = () => {
   const [formSubmit, setFormSubmit] = useState(false);
@@ -35,13 +44,15 @@ const SignUpForm = () => {
         method: "post",
         url: "http://localhost:3000/api/user/register",   // `${process.env.REACT_APP_API_URL}api/user/register`
         data: {
-          pseudo: pseudo,    
-          email: email,  
-          password: password, 
+          pseudo: this.pseudo,    
+          email: this.email,  
+          password: this.password, 
         },
-        headers: {
+        headers:  {
+          'Content-Type': 'application/json',
           "Access-Control-Allow-Origin": "*",
-        },
+          'Accept': '*',
+          }
       })
         .then((res) => {
           console.log(res);
@@ -130,3 +141,4 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
+
