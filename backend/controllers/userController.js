@@ -212,6 +212,7 @@ module.exports.deleteUser = (req, res) => {
           const token = jwt.sign({ userId: user.id }, {
             expiresIn: "24h",
           });
+          console.log(token);
           const message = "L'utilisateur a été connecté avec succès";
           return res.status(200).json({ message, data: user, token });
         });

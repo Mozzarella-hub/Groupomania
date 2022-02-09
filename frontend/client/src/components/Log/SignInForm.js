@@ -12,11 +12,11 @@ const SignInForm = () => {
 
     axios({
       method: "post",
-      url: 'http://localhost:4000/api/user/login',        //    ${process.env.REACT_APP_API_URL}api/user/
-      withCredentials: true,
+      url: 'http://localhost:4000/api/user/login',  
+      withCredentials: false,
       data: {
-        email,
-        password,
+        email: email,
+        password: password,
       },
     })
       .then((res) => {

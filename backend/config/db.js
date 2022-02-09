@@ -37,7 +37,7 @@ const initDb = () => {
         email: "admin@gmail.com",
         pseudo: "admin",
         password: 'Openclassroom',
-        isAdmin: false,
+        isAdmin: true,
       })
       .then((user) => console.log(user.toJSON()));
     console.log("la base de données est initialisée.");
