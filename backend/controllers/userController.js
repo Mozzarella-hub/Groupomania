@@ -168,12 +168,14 @@ module.exports.deleteUser = (req, res) => {
 
   // inscription
   exports.signup = (req, res, next) => {
+    console.log('request');
+    // console.log(req);
     console.log(req.body);
-    bcrypt.hash(req.body.password, 10).then((hash) => {
+    // bcrypt.hash(req.body.password, 10).then((hash) => {
       user.create({
         email: req.body.email,
         pseudo: req.body.pseudo,
-        password: hash,
+        password: req.body.password,
       })
         .then((user) => {
           const message = `L'utilisateur ${req.body.pseudo} a bien été créé.`;
@@ -189,7 +191,7 @@ module.exports.deleteUser = (req, res) => {
             "L'utilisateur n'a pas pu être créé, veuillez rééssayer dans un instant.";
           res.status(500).json({ message, data: error });
         });
-    });
+    // });
   };
 
   // connexion

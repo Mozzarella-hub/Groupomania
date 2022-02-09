@@ -7,7 +7,7 @@ const Log = ( props ) => {
     const [signInModal, setSignInModal] = useState(props.signin);
 
     const handleModals =(e) =>{
-        if (e.target.id === 'register' ) {
+        if (e.target.id === 'signup' ) {
             setSignInModal(false);
             setSignUpModal(true);
         } else if (e.target.id === 'login') {
@@ -21,7 +21,7 @@ const Log = ( props ) => {
            <div className='form-container'>
                <ul>
                    <li  onClick={handleModals}
-                        id='register' 
+                        id='signup' 
                         className={signUpModal? "active-btn" : null}>
                         S'inscrire
                     </li>

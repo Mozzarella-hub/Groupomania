@@ -42,20 +42,20 @@ const SignUpForm = () => {
     } else {
       await axios({
         method: "post",
-        url: "http://localhost:3000/api/user/register",   // `${process.env.REACT_APP_API_URL}api/user/register`
+        url: "http://localhost:4000/api/user/signup",   // `${process.env.REACT_APP_API_URL}api/user/register`
         data: {
-          pseudo, //: this.pseudo,    
-          email, //: this.email,  
-          password, //: this.password, 
+          pseudo, //: this.pseudo.id,    
+          email, //: this.email.id,  
+          password, //: this.password.id, 
         },
         headers:  {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
           'Accept': '*',
           }
       })
         .then((res) => {
-          console.log(res);
+          console.log(res);  //AJOUT REQUETE => REQ
           if (res.data.errors) {
             pseudoError.innerHTML = res.data.errors.pseudo;
             emailError.innerHTML = res.data.errors.email;
@@ -64,7 +64,7 @@ const SignUpForm = () => {
             setFormSubmit(true);
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err + 'PROBLEME Signup l.67'));
     }
   };
 
