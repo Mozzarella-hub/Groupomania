@@ -21,7 +21,7 @@ module.exports = router;
 
 
 const express = require("express");
-const auth = require("../middleware/auth.middleware");
+//const auth = require("../middleware/auth.middleware");
 const router = express.Router();
 
 const postController = require("../controllers/postController");

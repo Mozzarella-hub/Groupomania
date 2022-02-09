@@ -44,9 +44,9 @@ const SignUpForm = () => {
         method: "post",
         url: "http://localhost:3000/api/user/register",   // `${process.env.REACT_APP_API_URL}api/user/register`
         data: {
-          pseudo: this.pseudo,    
-          email: this.email,  
-          password: this.password, 
+          pseudo, //: this.pseudo,    
+          email, //: this.email,  
+          password, //: this.password, 
         },
         headers:  {
           'Content-Type': 'application/json',

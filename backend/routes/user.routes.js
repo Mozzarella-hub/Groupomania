@@ -32,10 +32,8 @@ const router = express.Router();
 
 const userCtrl = require("../controllers/userController");
 
-// auth
-
 //inscription
-router.post("/register", userCtrl.signup);
+router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
 
 //user db
