@@ -11,7 +11,7 @@ export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 export const getUser = (uid) =>{
     return (dispatch) => {
         return axios
-        .get(`http://localhost:3000/api/user/${uid}`)   //`${process.env.REACT_APP_API_URL}api/user/${uid}`
+        .get(`http://localhost:4000/api/user/${uid}`)   //`${process.env.REACT_APP_API_URL}api/user/${uid}`
         .then((res) =>{
             dispatch({ type: GET_USER, payload: res.data})
         })
@@ -22,7 +22,7 @@ export const getUser = (uid) =>{
 export const uploadPicture = (data, id) =>{
     return (dispatch) =>{
         return axios
-            .post('http://localhost:3000/api/user/upload', data)   //${process.env.REACT_APP_API_URL}api/user
+            .post('http://localhost:4000/api/user/upload', data)   //${process.env.REACT_APP_API_URL}api/user
             .then((res) =>{
                 return axios
                 .get(`${process.env.REACT_APP_API_URL}api/user/${id}`)
@@ -38,7 +38,7 @@ export const updateBio = (userId, bio) =>{
     return (dispatch) =>{
         return axios({
             method: 'put',
-            url: `http://localhost:3000/api/user/` + userId,  //  `${process.env.REACT_APP_API_URL}api/user/`
+            url: `http://localhost:4000/api/user/` + userId,  //  `${process.env.REACT_APP_API_URL}api/user/`
             data: { bio }
         })
             .then((res) => {
@@ -52,7 +52,7 @@ export const followUser = (followerId, idToFollow) =>{
     return (dispatch) =>{
         return axios({
             method:'patch',
-            url: `http://localhost:3000/api/user/follow/` + followerId,  // `${process.env.REACT_APP_API_URL}api/user/`
+            url: `http://localhost:4000/api/user/follow/` + followerId,  // `${process.env.REACT_APP_API_URL}api/user/`
             data: {idToFollow}
         })
         .then((res) =>{
@@ -67,7 +67,7 @@ export const unfollowUser = (followerId, idToUnfollow) =>{
     return (dispatch) =>{
         return axios({
             method:'patch',
-            url: `http://localhost:3000/api/user/unfollow/` + followerId,  // `${process.env.REACT_APP_API_URL}api/user/`
+            url: `http://localhost:4000/api/user/unfollow/` + followerId,  // `${process.env.REACT_APP_API_URL}api/user/`
             data: {idToUnfollow}
         })
         .then((res) =>{

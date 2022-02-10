@@ -15,7 +15,7 @@ const App = () => {
  
     await axios({
       method:'get',
-      url: `http://localhost:3000/api/user/jwtid`,       // ${process.env.REACT_APP_API_URL}                      
+      url: `http://localhost:4000/api/user/jwtid`,       // ${process.env.REACT_APP_API_URL}                      
       withCredentials: true,
     })
       .then((res) => setUid(res.data))
