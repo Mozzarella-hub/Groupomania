@@ -16,7 +16,7 @@ const App = () => {
     await axios({
       method:'get',
       url: `http://localhost:4000/api/user/jwtid`,       // ${process.env.REACT_APP_API_URL}                      
-      withCredentials: true,
+      withCredentials: false,
     })
       .then((res) => setUid(res.data))
       .catch((err) =>console.log('No token'));

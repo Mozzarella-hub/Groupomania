@@ -205,7 +205,7 @@ module.exports.deleteUser = (req, res) => {
         if (!user) {
           return res.status(404).json({ error: "Utilisateur non trouvé." });
         }
-        bcrypt.compare(req.body.password, user.password).then((valid) => {
+        user.compare(req.body.password, user.password).then((valid) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe incorrect." });
           }

@@ -20,6 +20,7 @@
     "multer": "^2.0.0-rc.1",
     "mysql2": "^2.3.3",
     "node-fetch": "^2.6.1",
+    "password-validator": "^5.2.1",
     "pug": "^3.0.2",
     "sequelize": "^7.0.0-alpha.2"
   }
