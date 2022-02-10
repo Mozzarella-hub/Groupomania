@@ -40,8 +40,8 @@ const authController = require('../middleware/auth.middleware');
 //const uploadController = require('../controllers/upload.controller');
 
 //inscription
-router.post("/signup",  authController, userCtrl.signup);
-router.post("/login", authController, userCtrl.login);
+router.post("/signup",  authController.signup);
+router.post("/login", authController.login);
 
 //récupérer tous les users
 router.get("/", userCtrl.getAllUsers);

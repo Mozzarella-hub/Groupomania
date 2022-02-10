@@ -1,7 +1,6 @@
-
 const { user } = require("../config/db");
-const { post } = require("../database/sequelize");
-const { comment } = require("../database/sequelize");
+const { post } = require("../config/db");
+const { comment } = require("../config/db");
 
   // CRUD USER
   //Récupérer tous les users
@@ -62,7 +61,7 @@ const { comment } = require("../database/sequelize");
         post.destroy({ where: { postId: req.params.id } }).then(() => {
           comment.destroy({ where: { commentId: req.params.id } }).then(() => {
             const message =
-              "L'utilisateur, ses posts et ses commentaires ont été supprimés";
+              "L'utilisateur et son contenu ont été supprimés";
             return res.status(200).json({ message });
           });
         });
