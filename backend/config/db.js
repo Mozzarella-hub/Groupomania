@@ -23,7 +23,8 @@ try {
   dataBase.authenticate();
   console.log("Connection établie, ISS enterprise prêt au combat");
 } catch (error) {
-  console.error("Les klingons sa piques:", error);
+  console.error(error);
+  console.log("les klingons punaise" + error);
 }
 
 const post = postModel(dataBase, DataTypes);
