@@ -1,69 +1,80 @@
-const jwt = require("jsonwebtoken");
-const { signUpErrors, signInErrors } = require("../utils/errors.utils");
+//IMPORTS
 const { user } = require("../config/db");
+const jwt = require("../utils/jwt.utils");
 
-const maxAge = 3 * 24 * 60 * 60 * 1000;
-
-const createToken = (id) => {
-  return jwt.sign({ id }, process.env.TOKEN_SECRET, {
-    expiresIn: maxAge,
-  });
-};
+const models = require("../models");
+const bcrypt = require("bcrypt");
 
 // inscription
 module.exports.signup = (req, res) => {
-  console.log("request");
-  console.log(req);
-  console.log(req.body);
-  user
-    .create({
-      email: req.body.email,
-      pseudo: req.body.pseudo,
-      password: req.body.password,
+  const email = req.body.email;
+  const password = req.body.password;
+  const pseudo = req.body.pseudo;
+
+  if (email == null || password == null || pseudo == null) {
+    return res.status(400).json({ error: "Missing parameters" });
+  }
+
+  // VERIFICATION psueod lenght password ...
+  models.user
+    .findOne({
+      attributes: ["email"],
+      where: { email: email },
     })
-    .then((user) => {
-      const message = `L'utilisateur ${req.body.pseudo} a bien été créé.`;
-      res.status(201).json({ message, data: user });
-    })
-    .catch((error) => {
-      if (error) {
-        return res.status(400).json({ message: error.message, data: error });
+    .then(function (userFound) {
+      if (!userFound) {
+        bcrypt.hash(password, 10, function (err, bcryptPassword) {
+          const newUser = models.user
+            .create({
+              email: email,
+              pseudo: pseudo,
+              password: password,
+              bio: bio,
+              isAdmin: 0,
+            })
+            .then(function (newUser) {
+              return res.status(201).json({
+                userId: newUser.id,
+              });
+            });
+        });
+      } else {
+        return res.status(409).json({ error: "user existe déjà Mr.Spock" });
       }
-      const message =
-        "L'utilisateur n'a pas pu être créé, veuillez rééssayer dans un instant.";
-      res.status(500).json({ message, data: error });
+    })
+    .catch(function (err) {
+      return res.status(500).json({ error: "Ne peut pas vérifier user" });
     });
 };
 
 //CONNEXION
-module.exports.login = async (req, res) => {
-  user
-    .findOne({
-      where: {
-        email: req.body.email,
-      },
-    })
-    .then((user) => {
-      if (!user) {
-        return signInErrors;
+module.exports.login = (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  if (email == null || password == null) {
+    return res.status(400).json({'error': 'on cherche les paramètres LOGIN'})
+  }
+  //ON VERIF USER EXIST OR NOT 
+  models.user
+  .findOne({
+    where: { email: email },
+  })
+  if (userFound) {
+    bcrypt.compare(password, userFound.password, function (errBycrypt, resBycrypt) {
+      if(resBycrypt){
+        return res.status(200).json({
+          'userId': newUser.id,
+          'token': jwt.generateToken(userFound)
+        })
+      }else{
+        return res.status(403).json({ 'error' : 'password incorrect'})
       }
-      user.compare(req.body.password, user.password).then((valid) => {
-        if (!valid) {
-          return signInErrors;
-        }
-        const token = createToken(user.id);
-        res.cookie("jwt", token, { httpOnly: true, maxAge });
-        res.status(200).json({ user: user.id });
-        console.log(token);
-        const message = "L'utilisateur a été connecté avec succès";
-        return res.status(200).json({ message, data: user, token });
-      });
-    })
-    .catch((error) => {
-      const message =
-        "L'utilisateur n'a pas pu être connecté, réessayez dans un instant.";
-      return res.json({ message, data: error });
     });
+
+  } else {
+    return res.status(404).json({'error': 'user is not exist in database'});
+  }
 };
 
 module.exports.logout = (req, res) => {
