@@ -26,7 +26,7 @@ module.exports.signup = (req, res) => {
       res.status(201).json({ message, data: user });
     })
     .catch((error) => {
-      if (error instanceof ValidationError) {
+      if (error) {
         return res.status(400).json({ message: error.message, data: error });
       }
       const message =

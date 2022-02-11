@@ -32,7 +32,7 @@ const user = userModel(dataBase, DataTypes);
 const comment = commentModel(dataBase, DataTypes);
 
 const initDb = () => {
-  return dataBase.sync({ force: true }).then(() => {
+  return dataBase.sync({ force: true }).then(() => { //Voir force true
     user
       .create({
         email: "admin@gmail.com",
@@ -44,5 +44,4 @@ const initDb = () => {
     console.log("la base de données est initialisée.");
   });
 };
-
 module.exports = { initDb, user, post, comment };

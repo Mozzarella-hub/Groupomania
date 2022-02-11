@@ -118,7 +118,7 @@ const { Post } = require("../config/db");
 
 // récupérer tous les posts
 module.exports.getAllPosts = (req, res, next) => {
-  Post.findAll({
+  Post.findAll(options)({
     order: [["createdAt", "DESC"]],
   }).then((posts) => {
     const message = "Voici tous les posts.";

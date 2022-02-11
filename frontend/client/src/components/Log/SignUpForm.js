@@ -1,15 +1,7 @@
 
-
 import React, { useState } from "react";
 import axios from "axios";
 import SignInForm from "./SignInForm";
-
-/*
-import express from "express";
-var app = express();
-var cors = require('cors');
-app.use(cors());
-*/
 
 const SignUpForm = () => {
   const [formSubmit, setFormSubmit] = useState(false);
@@ -55,7 +47,7 @@ const SignUpForm = () => {
           }
       })
         .then((res) => {
-          console.log(res);  //AJOUT REQUETE => REQ
+          console.log(res); 
           if (res.data.errors) {
             pseudoError.innerHTML = res.data.errors.pseudo;
             emailError.innerHTML = res.data.errors.email;
