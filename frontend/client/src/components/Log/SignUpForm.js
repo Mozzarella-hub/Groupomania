@@ -56,7 +56,7 @@ const SignUpForm = () => {
             setFormSubmit(true);
           }
         })
-        .catch((err) => console.log(err + 'PROBLEME Signup l.67'));
+        .catch((err) => console.log(err + 'PROBLEME Signup l.59'));
     }
   };
 

@@ -1,5 +1,6 @@
 
 //password": "$2a$10$EMnYDhfq1x7OlBLRFai8vOVKLzY.k1lXF4TNNL0hE6NVEmou4epJu",
+const bcrypt = require("bcrypt");
 
 
 module.exports = (sequelize, DataTypes) => {
@@ -34,6 +35,14 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      instanceMethods: {
+        generateHash(password) {
+            return bcrypt.hash(password, bcrypt.genSaltSync(8));
+        },
+        validPassword(password) {
+            return bcrypt.compare(password, this.password);
+        }
+    }
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,

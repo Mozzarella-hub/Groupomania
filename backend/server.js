@@ -2,11 +2,11 @@
 const http = require("http");
 const app = require("./app");
 const bodyParser = require("body-parser");
-const authConfig = require("./middleware/auth.middleware");
+const authConfig = require("./controllers/userController");
 
 //Body parse configuration
-server.use(bodyParser.urlencoded({ extended:true }));
-server.use(bodyParser.json());
+// server.use(bodyParser.urlencoded({ extended:true }));
+// server.use(bodyParser.json());
 
 const port = "4000";
 app.set("port", port);
@@ -20,6 +20,6 @@ server.on("listening", () => {
   console.log("Listening on " + bind);
 });
 
-server.use('/api/', authConfig);
+// server.use('/api/', authConfig);
 
 server.listen(port);

@@ -4,12 +4,11 @@ const router = express.Router();
 
 
 const userCtrl = require("../controllers/userController");
-const authController = require('../middleware/auth.middleware');
 //const uploadController = require('../controllers/upload.controller');
 
 //User route
-router.post("/signup",  authController.signup);
-router.post("/login", authController.login);
+router.post("/signup",  userCtrl.signup);
+router.post("/login", userCtrl.login);
 
 //récupérer tous les users
 router.get("/", userCtrl.getAllUsers);
