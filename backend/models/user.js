@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       instanceMethods: {
         generateHash(password) {
-            return bcrypt.hash(password, bcrypt.genSaltSync(8));
+            return bcrypt.hash(password, bcrypt.genSaltSync(10));
         },
         validPassword(password) {
             return bcrypt.compare(password, this.password);

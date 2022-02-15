@@ -15,7 +15,7 @@ app.use(cors());
 //gestion du cors
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "*", "localhost");
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
@@ -27,6 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 
 sequelize.initDb();

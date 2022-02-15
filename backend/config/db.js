@@ -32,7 +32,7 @@ const user = userModel(dataBase, DataTypes);
 const comment = commentModel(dataBase, DataTypes);
 
 const initDb = () => {
-  return dataBase.sync({ force: true }).then(() => { //Voir force true
+  return dataBase.sync({ force: true }).then(() => {
     user
       .create({
         email: "admin@gmail.com",

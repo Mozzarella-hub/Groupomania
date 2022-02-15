@@ -5,9 +5,6 @@ const { comment } = require("../config/db");
 const { ValidationError } = require("sequelize");
 const models = require("../models/");
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
 const jwt = require("../utils/jwt.utils");
 
 // CRUD USER
@@ -25,13 +22,13 @@ module.exports.signup = (req, res) => {
   // VERIFICATION psueod lenght password ...
   user
     .findOne({
-      attributes: ["email"],
-      where: { email: email },
+      attributes: ["email", "password"],
+      where: { email: email, password: password},
     })
-    .then(function (user) {
-      if (!user) {
-        //bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
-          // const newUser = models.user;
+    .then(function (userFound) {
+      if (!userFound) {
+        bcrypt.hash(password, 10, function () {
+          const newUser = models.user;
           user
             .create({
               email: email,
@@ -40,12 +37,12 @@ module.exports.signup = (req, res) => {
               // bio: bio,
               isAdmin: 0,
             })
-            .then(function (user) {
+            .then(function (newUser) {
               return res.status(201).json({
-                userId: user.id,
+                userId: newUser.id,
               });
             });
-        //});
+        });
       } else {
         return res.status(409).json({ error: "user existe déjà Mr.Spock" });
       }
@@ -74,9 +71,10 @@ module.exports.login = (req, res) => {
       } else {
         bcrypt.compare(req.body.password, user.password).then((valid) => {
           if (!valid) {
+            console.log(res);
             return res.status(401).json({ error: "Mot de passe incorrect." });
           } else {
-            const token = jwt.sign({ userId: user.id }, {
+            const token = jwt.sign({ userId: user.id }, privateKey, {
               expiresIn: "48h",
             });
             const message = "L'utilisateur a été connecté avec succès";
