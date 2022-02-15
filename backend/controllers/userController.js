@@ -1,8 +1,9 @@
 const { user } = require("../config/db");
 const { post } = require("../config/db");
 const { comment } = require("../config/db");
+const { token } = require("../utils/jwt.utils");
 
-const { ValidationError } = require("sequelize");
+// const { ValidationError } = require("sequelize");
 const models = require("../models/");
 const bcrypt = require("bcrypt");
 const jwt = require("../utils/jwt.utils");
